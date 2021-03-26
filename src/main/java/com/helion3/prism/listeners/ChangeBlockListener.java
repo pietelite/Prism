@@ -48,6 +48,13 @@ public class ChangeBlockListener {
     @Listener(order = Order.POST)
     public void onChangeBlock(ChangeBlockEvent event) {
 
+        if (!(event instanceof ChangeBlockEvent.Break
+                || event instanceof ChangeBlockEvent.Place
+                || event instanceof ChangeBlockEvent.Decay
+                || event instanceof ChangeBlockEvent.Grow)) {
+            return;  // Don't bother
+        }
+
         if (event.getCause().allOf(PluginContainer.class).stream().map(PluginContainer::getId).anyMatch(id ->
                 Prism.getInstance().getConfig().getGeneralCategory().getBlacklist().contains(id))) {
             // Don't do anything
@@ -111,7 +118,7 @@ public class ChangeBlockListener {
                         .event(PrismEvents.BLOCK_GROW)
                         .target(finalBlockType.getId().replace("_", " "))
                         .buildAndSave();
-            } else if (event instanceof ChangeBlockEvent.Place) {
+            } else /* if (event instanceof ChangeBlockEvent.Place) */ {
                 if (!Prism.getInstance().getConfig().getEventCategory().isBlockPlace()
                         || BlockUtil.rejectPlaceCombination(originalBlockType, finalBlockType)
                         || EventUtil.rejectPlaceEventIdentity(originalBlockType, finalBlockType, event.getCause())) {

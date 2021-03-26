@@ -31,7 +31,7 @@ public final class Reference {
 
     public static final String ID = "prism";
     public static final String NAME = "Prism";
-    public static final String VERSION = "3.0.0";
+    public static final String VERSION = "3.0.1";
     public static final String DESCRIPTION = "A rollback/restore grief-prevention plugin.";
     public static final String AUTHORS = "viveleroi";
     public static final String SOURCE = "https://github.com/prism/Prism";
