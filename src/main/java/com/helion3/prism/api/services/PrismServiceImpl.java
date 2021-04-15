@@ -137,6 +137,8 @@ public class PrismServiceImpl implements PrismService {
             DataQueries.Created,
             MatchRule.GREATER_THAN_EQUAL,
             earliest)));
+    // TODO If not present, set the latest time to be the current date
+    //  (to prevent barring any future inserts while querying)
     conditions.getLatest().ifPresent(latest ->
         query.addCondition(FieldCondition.of(
             DataQueries.Created,
